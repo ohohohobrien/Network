@@ -1,0 +1,17 @@
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="form-group mt-4">
+
+        <h3 class="mb-4 text-light">Post what's on your mind...</h3>
+
+        <div class="container">
+            <form action="{% url 'create_post' %}" method="post" id="create_post">
+                {% csrf_token %}
+                <textarea form="create_post" autofocus type="text" class="form-control w-20 p-3" style="white-space: pre-wrap; height:200px; font-size: 2em;" name="content" id="content" placeholder="What's on your mind?"></textarea>
+                <input type="submit" class="btn btn-primary mt-2" name="submit" id="submit_button" value="post">
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endif %}

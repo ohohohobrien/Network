@@ -1,0 +1,57 @@
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-500px) scaleY(1);
+        opacity: 0;
+    }
+
+    60% {
+        opacity: .3;
+    }
+
+    80% {
+        transform: translateX(-0px) scaleY(1.05);
+    }
+
+    100% {
+        transform: translateX(0px) scaleY(1);
+        opacity: 1;
+    }
+}
+
+.slideIn {
+    animation-name: slide-in-left;
+    animation-duration: 1s;
+    animation-play-state: default;
+    animation-direction: alternate;
+}
+
+.container .slideIn:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.container .slideIn:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.container .slideIn:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.container .slideIn:nth-child(4) {
+    animation-delay: 0.4s;
+}
+.container .slideIn:nth-child(5) {
+    animation-delay: 0.5s;
+}
+.container .slideIn:nth-child(6) {
+    animation-delay: 0.6s;
+}
+.container .slideIn:nth-child(7) {
+    animation-delay: 0.7s;
+}
+.container .slideIn:nth-child(8) {
+    animation-delay: 0.8s;
+}
+.container .slideIn:nth-child(9) {
+    animation-delay: 0.9s;
+}
+.container .slideIn:nth-child(10) {
+    animation-delay: 1s;
+}

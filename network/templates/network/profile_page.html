@@ -1,0 +1,33 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="container mt-4 mb-4">
+        <h2 class="text-light">{{ username }}</h2>
+    
+        <div class="row">
+            <div class="col-2">
+                <span class="text-light" style="font-size: 14px; font-weight: bold;">Followers: </span>
+                <span class="text-light" style="font-size: 14px; font-weight: bold;" id="follower_count">{{ follow_count }}</span>
+            </div>
+            <div class="col">
+                <span class="text-light" style="font-size: 14px; font-weight: bold;">Following: </span>
+                <span class="text-light" style="font-size: 14px; font-weight: bold;" id="following_count">{{ following_count }}</span>
+            </div>
+        </div>
+        <br>
+        {% if user.username != username %}
+        {% csrf_token %}
+            <button id="follow_button" class="btn btn-primary" data-followed-user="{{ followed_user_id }}" data-following-user="{{ following_user_id }}">{{ follow_status }}</button>
+        {% endif %}
+    </div>
+
+    {% include "network/post_layout.html" %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/profile_page.js' %}"></script>
+    <script src="{% static 'network/like_button.js' %}"></script>
+    <script src="{% static 'network/edit_button.js' %}"></script>
+{% endblock %}

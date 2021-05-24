@@ -1,0 +1,64 @@
+<div class="container mt-8 mb-8 p-4">
+    <h3 class="mb-4 text-light">The latest posts:</h3>
+
+    {% for post in posts %}
+
+        <div class="container border border-5 p-4 mb-2 border border-primary slideIn" style="background-color: rgb(250, 250, 250); border-radius: 2em;" id="container{{ post.pk }}">
+            <div class="row p-2">
+                <a "col-1" href="{% url 'profile_page' post.poster.username %}">
+                    <img style="width: auto; height: 30px; flex: none;" src="http://www.newdesignfile.com/postpic/2013/01/generic-user-icon-windows_321380.png" alt="Profile Image">
+                </a>
+                <a class="col-8" href="{% url 'profile_page' post.poster.username %}">
+                    <h4>{{ post.poster.username }}</h4>
+                </a>
+                <span style="font-size: 20px;" class="col-3 float-right text-secondary" id="time{{ post.pk }}"><i>{{ post.time_posted }}</i></span>
+            </div>
+            <br/>
+            <span id="content{{ post.pk }}" style="white-space: pre-wrap; font-size: 2em;">{{ post.content }}</span>
+            <br/>
+            <br/>
+            {% for key,value in likes.items %}
+                {% if post.pk == key %}
+                    <span style="font-size: 14px; font-weight: bold;">Likes: </span>
+                    <span style="font-size: 14px; font-weight: bold;" id="count{{ post.pk }}">{{ value }}</span>
+                {% endif %}
+            {% endfor %}
+            {% if user.is_authenticated %}
+            
+                {% if post.pk in liked_posts %}
+                    <button id="{{ post.pk }}" class="btn btn-outline-primary ml-4 like-button">unlike</button>
+                {% else %}
+                    <button id="{{ post.pk }}" class="btn btn-outline-primary ml-4 like-button">like</button>
+                {% endif %}
+
+                {% if post.poster == request.user %}
+                    <button id="edit{{ post.pk }}" data-post="{{ post.pk }}" class="btn btn-secondary ml-4 edit-button">edit</button>
+                    <button id="save{{ post.pk }}" data-post="{{ post.pk }}" class="btn btn-success ml-4 d-none save-button">save</button>
+                    <button id="cancel{{ post.pk }}" data-post="{{ post.pk }}" class="btn btn-warning ml-4 d-none cancel-button">cancel</button>
+                    <button id="delete{{ post.pk }}" data-post="{{ post.pk }}" class="btn btn-danger ml-4 d-none delete-button">delete</button>
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+        
+    {% empty %}
+        <span>There were no posts to show.</span>
+    {% endfor %}
+
+</div>
+
+<div class="container p-4">
+
+        {% if posts.has_previous %}
+            <a href="{{ request.path }}?page={{ posts.previous_page_number }}">
+                <button class="btn btn-primary ml-4 like-button">Previous Page</button>
+            </a>
+        {% endif %}
+        {% if posts.has_next %}
+            <a href="{{ request.path }}?page={{ posts.next_page_number }}">
+                <button class="btn btn-primary ml-4 like-button">Next Page</button>
+            </a>
+        {% endif %}
+    
+</div>
